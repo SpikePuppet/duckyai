@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
 
-interface OpenAIChatCompletionMessage {
+export interface OpenAIChatCompletionMessage {
   role: "user" | "system" | "assistant";
   content: string;
 }
