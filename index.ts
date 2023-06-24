@@ -3,11 +3,6 @@ import "dotenv/config";
 import * as readline from "readline";
 import { input } from "@inquirer/prompts";
 
-const read = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
 // Example prompts for testing:
 //  1. "How would I view my current branch and it's previous commits in a nice tree format?";
 const prompt = await input({
@@ -57,7 +52,4 @@ openAiResponse()
   .catch((error) => {
     console.log(error);
     //console.log("There was an error");
-  })
-  .finally(() => {
-    read.close();
   });
