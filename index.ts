@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { Command } from "commander";
 import { interactivePrompt } from "./interactivePrompt.ts";
+import { query } from "./query.ts";
 
 const program = new Command();
 program
@@ -12,5 +13,10 @@ program
   .command("chat", { isDefault: true })
   .description("Chat with Ducky!")
   .action(async () => interactivePrompt());
+
+program
+  .command("query")
+  .description("Query Ducky!")
+  .action(() => query());
 
 program.parse();
