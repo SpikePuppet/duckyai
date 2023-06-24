@@ -10,12 +10,14 @@ console.log(chalk.white("How can I help?"));
 // Example prompts for testing:
 //  1. "How would I view my current branch and it's previous commits in a nice tree format?"
 while (true) {
-  const prompt = await input({
-    message: "Hi I'm Ducky! What are you trying to build?",
-  });
+  const prompt = await input({ message: "" });
 
   if (prompt === "exit") {
     break;
+  }
+
+  if (prompt === "") {
+    continue;
   }
 
   const openAiClient = createOpenAiClient();
@@ -32,6 +34,5 @@ while (true) {
     ],
   });
 
-  console.log(response.data);
   console.log(response.data.choices[0].message);
 }
