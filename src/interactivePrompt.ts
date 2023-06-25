@@ -15,8 +15,6 @@ export async function interactivePrompt() {
 
   const userPrompts: OpenAIChatCompletionMessage[] = [];
 
-  // Example prompts for testing:
-  //  1. "How would I view my current branch and it's previous commits in a nice tree format?"
   while (true) {
     const prompt = await input({ message: "" });
 
