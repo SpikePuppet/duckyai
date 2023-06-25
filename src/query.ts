@@ -17,7 +17,7 @@ export async function query(prompt: string) {
   });
 
   const response = await openAiClient.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-0301",
     messages: [...duckySystemPrompt, ...userPrompts],
   });
 
