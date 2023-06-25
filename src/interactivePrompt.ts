@@ -39,6 +39,16 @@ export async function interactivePrompt() {
       messages: [...duckySystemPrompt, ...userPrompts],
     });
 
-    console.log(response.data.choices[0].message);
+    const command = response.data.choices[0].message?.content;
+    if (command === undefined) {
+      console.log(
+        chalk.red(
+          "I'm not quite sure how to help with that. Can you try rephrasing?",
+        ),
+      );
+      continue;
+    }
+
+    console.log(command);
   }
 }

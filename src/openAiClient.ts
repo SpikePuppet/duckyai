@@ -28,7 +28,7 @@ function createDuckySystemPrompt(): OpenAIChatCompletionMessage[] {
     },
     {
       role: "system",
-      content: "Only show the command itself.",
+      content: "Only show the command itself. Do not wrap it in code blocks.",
     },
   ];
 }
