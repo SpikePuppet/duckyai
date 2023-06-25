@@ -29,14 +29,20 @@ export async function interactivePrompt() {
     const openAiClient = createOpenAiClient();
     const duckySystemPrompt = createDuckySystemPrompt();
 
-    userPrompts.push({
+    // userPrompts.push({
+    //   role: "user",
+    //   content: prompt,
+    // });
+
+    const userPrompt: OpenAIChatCompletionMessage = {
       role: "user",
       content: prompt,
-    });
+    };
 
     const response = await openAiClient.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [...duckySystemPrompt, ...userPrompts],
+      // messages: [...duckySystemPrompt, ...userPrompts],
+      messages: [...duckySystemPrompt, userPrompt],
     });
 
     const command = response.data.choices[0].message?.content;
