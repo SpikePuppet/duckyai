@@ -30,5 +30,5 @@ export async function query(prompt: string) {
     );
   }
 
-  return command;
+  console.log(command);
 }

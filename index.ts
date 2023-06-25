@@ -17,6 +17,7 @@ program
 program
   .command("query")
   .description("Query Ducky!")
-  .action(() => query());
+  .argument("<question>", "The query you have for Ducky!")
+  .action(async (question) => query(question));
 
 program.parse();
