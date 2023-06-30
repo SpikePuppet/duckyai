@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Command } from "commander";
-import { interactivePrompt } from "./src/interactivePrompt.ts";
-import { query } from "./src/query.ts";
+import { interactivePrompt } from "./interactivePrompt.js";
+import { query } from "./query.js";
 
 const program = new Command();
 program

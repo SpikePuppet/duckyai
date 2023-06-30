@@ -3,7 +3,7 @@ import {
   OpenAIChatCompletionMessage,
   createDuckySystemPrompt,
   createOpenAiClient,
-} from "./openAiClient.ts";
+} from "./openAiClient.js";
 
 export async function query(prompt: string) {
   const userPrompts: OpenAIChatCompletionMessage[] = [];
