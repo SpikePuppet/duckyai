@@ -1,34 +1,23 @@
-import chalk from "chalk";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import {
-  OpenAIChatCompletionMessage,
-  createDuckySystemPrompt,
-  createOpenAiClient,
-} from "./openAiClient.js";
+  AIChatMessage,
+  HumanChatMessage,
+  SystemChatMessage,
+} from "langchain/schema";
 
 export async function query(prompt: string) {
-  const userPrompts: OpenAIChatCompletionMessage[] = [];
-
-  const openAiClient = createOpenAiClient();
-  const duckySystemPrompt = createDuckySystemPrompt();
-
-  userPrompts.push({
-    role: "user",
-    content: prompt,
+  const openAIApiKey = process.env.OPENAI_API_KEY;
+  const model = new ChatOpenAI({
+    openAIApiKey,
+    modelName: "gpt-3.5-turbo-0613",
+    temperature: 0.1,
   });
+  const response: AIChatMessage = await model.call([
+    new SystemChatMessage(
+      "You are DuckyAI, a helpful AI assistant that writes shell commands for users. You are given a description of what the user wants to do, and you should output a valid shell command in response. Do not output any of the context around the command. If you do have some context, omit it entirely.",
+    ),
+    new HumanChatMessage(prompt),
+  ]);
 
-  const response = await openAiClient.createChatCompletion({
-    model: "gpt-3.5-turbo-0613",
-    messages: [...duckySystemPrompt, ...userPrompts],
-  });
-
-  const command = response.data.choices[0].message?.content;
-  if (command === undefined) {
-    console.log(
-      chalk.red(
-        "I'm not quite sure how to help with that. Can you try rephrasing?",
-      ),
-    );
-  }
-
-  console.log(command);
+  console.log(response.text);
 }
