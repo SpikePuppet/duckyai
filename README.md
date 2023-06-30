@@ -1,4 +1,4 @@
-[](media/duckyai.png)
+![DuckyAI, your command line rubber duck!](media/duckyai.png)
 
 # duckyai
 
