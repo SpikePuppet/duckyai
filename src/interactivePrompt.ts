@@ -10,11 +10,20 @@ import {
 import { SystemMessagePromptTemplate } from "langchain/prompts";
 import { BufferMemory } from "langchain/memory";
 import { UserChatPrompt } from "./types";
+import fs from "fs";
+import { CONFIG_FILE_LOCATION, LOG_FILE_LOCATION } from "./configure.js";
+import { exit } from "process";
 
-export async function interactivePrompt() {
-  const openAIApiKey = process.env.OPENAI_API_KEY;
+interface ConfigurationOptions {
+  OPEN_AI_API_KEY: string;
+  LOG_CHAT: boolean;
+}
+
+export async function interactivePrompt(): Promise<void> {
+  const logFileName = `ducky-${getCurrentUnixTimestamp()}.log`;
+  const config = await loadConfig();
   const model = new ChatOpenAI({
-    openAIApiKey,
+    openAIApiKey: config.OPEN_AI_API_KEY,
     modelName: "gpt-3.5-turbo-0613",
     temperature: 0.1,
   });
@@ -61,5 +70,41 @@ export async function interactivePrompt() {
     console.log(chalk.green("Answer"));
     console.log(response.response);
     console.log("");
+
+    if (config.LOG_CHAT) {
+      fs.appendFileSync(
+        `${LOG_FILE_LOCATION}/${logFileName}.log`,
+        input.userQuestion + "\n\n",
+      );
+
+      fs.appendFileSync(
+        `${LOG_FILE_LOCATION}/${logFileName}.log`,
+        response.response + "\n\n",
+      );
+
+      fs.appendFileSync(
+        `${LOG_FILE_LOCATION}/${logFileName}.log`,
+        "-----------------------\n\n",
+      );
+    }
+  }
+}
+
+function getCurrentUnixTimestamp(): number {
+  return Math.floor(Date.now() / 1000);
+}
+
+function loadConfig(): ConfigurationOptions {
+  try {
+    const configData = fs.readFileSync(CONFIG_FILE_LOCATION, "utf8");
+    const config = JSON.parse(configData) as ConfigurationOptions;
+
+    return config;
+  } catch (err) {
+    console.error(
+      "There was an issue loading your config file %d. \nExiting...",
+      err,
+    );
+    exit(1);
   }
 }

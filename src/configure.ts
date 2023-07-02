@@ -6,6 +6,7 @@ import { ConfigurationPrompt } from "./types";
 
 export const CONFIG_FOLDER = `${os.homedir()}/.ducky`;
 export const CONFIG_FILE_LOCATION: string = `${CONFIG_FOLDER}/config.json`;
+export const LOG_FILE_LOCATION: string = `${CONFIG_FOLDER}/chat`;
 
 export async function configure() {
   const { prompt } = enquirer;
@@ -23,15 +24,28 @@ export async function configure() {
     message: "What is your OpenAI API key?",
     name: "openAiApiKey",
   });
+  console.log(chalk.green("Awesome!"));
+  const logging: ConfigurationPrompt = await prompt({
+    type: "input",
+    message: "Do you want to log your chats (y/n)?",
+    name: "logChat",
+  });
 
   try {
     if (!fs.existsSync(CONFIG_FOLDER)) {
       fs.mkdirSync(CONFIG_FOLDER);
     }
 
+    if (!fs.existsSync(LOG_FILE_LOCATION)) {
+      fs.mkdirSync(LOG_FILE_LOCATION);
+    }
+
     fs.writeFileSync(
       CONFIG_FILE_LOCATION,
-      JSON.stringify({ OPEN_AI_API_KEY: apiKey.openAiApiKey }),
+      JSON.stringify({
+        OPEN_AI_API_KEY: apiKey.openAiApiKey,
+        LOG_CHAT: logging.logChat === "y" ? true : false,
+      }),
       { flag: "w+", encoding: "utf-8" },
     );
   } catch (err) {

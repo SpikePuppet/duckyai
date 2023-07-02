@@ -3,8 +3,8 @@ export interface UserChatPrompt {
 }
 
 export interface ConfigurationPrompt {
-  configurationFileLocation?: string;
   openAiApiKey?: string;
+  logChat: string;
 }
 
 export interface OpenAIChatCompletionMessage {
