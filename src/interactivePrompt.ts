@@ -34,10 +34,11 @@ export async function interactivePrompt() {
   const { prompt } = enquirer;
 
   console.log(chalk.green("Hi! I'm Ducky!"));
+  console.log("");
   console.log(
     chalk.white("I'm here to help you with your command line needs!"),
   );
-  console.log(chalk.white("How can I help?"));
+  console.log("");
 
   while (true) {
     const input: UserChatPrompt = await prompt({
@@ -45,6 +46,7 @@ export async function interactivePrompt() {
       name: "userQuestion",
       message: "How can I help?",
     });
+    console.log("");
 
     if (input.userQuestion === "exit") {
       break;
@@ -56,6 +58,8 @@ export async function interactivePrompt() {
 
     const response = await chain.call({ userInput: input.userQuestion });
 
-    console.log(JSON.stringify(response.response));
+    console.log(chalk.green("Answer"));
+    console.log(response.response);
+    console.log("");
   }
 }
