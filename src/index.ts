@@ -3,12 +3,20 @@ import "dotenv/config";
 import { Command } from "commander";
 import { interactivePrompt } from "./interactivePrompt.js";
 import { query } from "./query.js";
+import { configure } from "./configure.js";
 
 const program = new Command();
 program
   .name("Ducky")
   .description("Ducky! Your command line rubber duck for all things terminal!")
   .version("0.1.0");
+
+program
+  .command("configure")
+  .description("Configure Ducky!")
+  .action(async () => {
+    await configure().catch(console.error);
+  });
 
 program
   .command("chat", { isDefault: true })
