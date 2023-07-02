@@ -1,8 +1,8 @@
 import chalk from "chalk";
-import { ConfigurationPrompt, UserChatPrompt } from "./types";
 import enquirer from "enquirer";
 import * as fs from "fs";
 import * as os from "os";
+import { ConfigurationPrompt } from "./types";
 
 export const CONFIG_FOLDER = `${os.homedir()}/.ducky`;
 export const CONFIG_FILE_LOCATION: string = `${CONFIG_FOLDER}/config.json`;
