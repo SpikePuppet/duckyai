@@ -13,12 +13,12 @@ program
 program
   .command("chat", { isDefault: true })
   .description("Chat with Ducky!")
-  .action(async () => interactivePrompt());
+  .action(async () => interactivePrompt().catch(console.error));
 
 program
   .command("query")
   .description("Query Ducky!")
   .argument("<question>", "The query you have for Ducky!")
-  .action(async (question) => query(question));
+  .action(async (question) => query(question).catch(console.error));
 
 program.parse();
