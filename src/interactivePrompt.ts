@@ -9,10 +9,7 @@ import {
 } from "langchain/prompts";
 import { SystemMessagePromptTemplate } from "langchain/prompts";
 import { BufferMemory } from "langchain/memory";
-
-export interface UserChatPrompt {
-  userQuestion: string;
-}
+import { UserChatPrompt } from "./types";
 
 export async function interactivePrompt() {
   const openAIApiKey = process.env.OPENAI_API_KEY;

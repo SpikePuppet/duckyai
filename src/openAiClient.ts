@@ -1,9 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-
-export interface OpenAIChatCompletionMessage {
-  role: "user" | "system" | "assistant";
-  content: string;
-}
+import { OpenAIChatCompletionMessage } from "./types";
 
 function createOpenAiClient() {
   const openAiApiKey = process.env.OPENAI_API_KEY;
