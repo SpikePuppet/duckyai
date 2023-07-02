@@ -4,6 +4,7 @@ import {
   HumanChatMessage,
   SystemChatMessage,
 } from "langchain/schema";
+import clipboard from "clipboardy";
 
 export async function query(prompt: string) {
   const openAIApiKey = process.env.OPENAI_API_KEY;
@@ -20,4 +21,5 @@ export async function query(prompt: string) {
   ]);
 
   console.log(response.text);
+  clipboard.writeSync(response.text);
 }
