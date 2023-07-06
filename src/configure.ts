@@ -2,13 +2,14 @@ import chalk from "chalk";
 import enquirer from "enquirer";
 import * as fs from "fs";
 import * as os from "os";
-import { ConfigurationPrompt } from "./types";
+import { ConfigurationOptions, ConfigurationPrompt } from "./types";
+import { exit } from "process";
 
 export const CONFIG_FOLDER = `${os.homedir()}/.ducky`;
 export const CONFIG_FILE_LOCATION: string = `${CONFIG_FOLDER}/config.json`;
 export const LOG_FILE_LOCATION: string = `${CONFIG_FOLDER}/chat`;
 
-export async function configure() {
+export async function configureDucky() {
   const { prompt } = enquirer;
   console.log(chalk.green("Let's configure Ducky!"));
   console.log(
@@ -50,5 +51,20 @@ export async function configure() {
     );
   } catch (err) {
     console.error(err);
+  }
+}
+
+export function loadDuckyConfig(): ConfigurationOptions {
+  try {
+    const configData = fs.readFileSync(CONFIG_FILE_LOCATION, "utf8");
+    const config = JSON.parse(configData) as ConfigurationOptions;
+
+    return config;
+  } catch (err) {
+    console.error(
+      "There was an issue loading your config file %d. \nExiting...",
+      err,
+    );
+    exit(1);
   }
 }

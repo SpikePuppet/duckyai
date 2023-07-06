@@ -5,11 +5,12 @@ import {
   SystemChatMessage,
 } from "langchain/schema";
 import clipboard from "clipboardy";
+import { loadDuckyConfig } from "./configure.js";
 
 export async function query(prompt: string) {
-  const openAIApiKey = process.env.OPENAI_API_KEY;
+  const config = await loadDuckyConfig();
   const model = new ChatOpenAI({
-    openAIApiKey,
+    openAIApiKey: config.OPEN_AI_API_KEY,
     modelName: "gpt-3.5-turbo-0613",
     temperature: 0.1,
   });

@@ -3,7 +3,7 @@ import "dotenv/config";
 import { Command } from "commander";
 import { interactivePrompt } from "./interactivePrompt.js";
 import { query } from "./query.js";
-import { configure } from "./configure.js";
+import { configureDucky } from "./configure.js";
 
 const program = new Command();
 program
@@ -15,7 +15,7 @@ program
   .command("configure")
   .description("Configure Ducky!")
   .action(async () => {
-    await configure().catch(console.error);
+    await configureDucky().catch(console.error);
   });
 
 program
