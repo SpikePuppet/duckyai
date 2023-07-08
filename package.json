@@ -1,18 +1,21 @@
 {
-  "name": "ducky",
-  "version": "1.0.0",
-  "description": "",
+  "name": "ducky-ai",
+  "version": "0.2.0",
+  "description": "DuckyAI is a command line rubber duck, here to help you generate command line commands",
   "main": "index.js",
   "scripts": {
-    "start": "tx ./index.ts",
+    "start": "tsx ./index.ts",
     "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
     "dist/"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ducky",
+    "duckyai"
+  ],
+  "author": "Rhys Johns (spikepuppet)",
   "license": "MIT",
   "dependencies": {
     "@swc/core": "^1.3.68",
@@ -26,13 +29,14 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@open-wc/building-rollup": "^3.0.0",
     "@types/node": "^20.3.1",
+    "deepmerge": "^4.3.1",
     "langchain": "^0.0.100",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.26.2",
     "tsup": "^7.1.0",
     "typescript": "^5.1.3"
   },
-  "type": "module",
-  "bin": {
-    "ducky": "./dist/index.js"
-  }
+  "bin": "./dist/index.mjs"
 }
