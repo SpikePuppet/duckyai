@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import "dotenv/config";
 import { Command } from "commander";
-import { interactivePrompt } from "./interactivePrompt.js";
-import { query } from "./query.js";
-import { configureDucky } from "./configure.js";
+import { interactivePrompt } from "./src/interactivePrompt.js";
+import { query } from "./src/query.js";
+import { configureDucky } from "./src/configure.js";
 
 const program = new Command();
 program
