@@ -1,14 +1,14 @@
+import clipboard from "clipboardy";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import {
   AIChatMessage,
   HumanChatMessage,
   SystemChatMessage,
 } from "langchain/schema";
-import clipboard from "clipboardy";
 import { loadDuckyConfig } from "./configure.js";
 
 export async function query(prompt: string) {
-  const config = await loadDuckyConfig();
+  const config = loadDuckyConfig();
   const model = new ChatOpenAI({
     openAIApiKey: config.OPEN_AI_API_KEY,
     modelName: "gpt-3.5-turbo-0613",
@@ -20,7 +20,6 @@ export async function query(prompt: string) {
     ),
     new HumanChatMessage(prompt),
   ]);
-
   console.log(response.text);
   clipboard.writeSync(response.text);
 }

@@ -6,8 +6,8 @@ import { ConfigurationOptions, ConfigurationPrompt } from "./types";
 import { exit } from "process";
 
 export const CONFIG_FOLDER = `${os.homedir()}/.ducky`;
-export const CONFIG_FILE_LOCATION: string = `${CONFIG_FOLDER}/config.json`;
-export const LOG_FILE_LOCATION: string = `${CONFIG_FOLDER}/chat`;
+export const CONFIG_FILE_LOCATION = `${CONFIG_FOLDER}/config.json`;
+export const LOG_FILE_LOCATION = `${CONFIG_FOLDER}/chat`;
 
 export async function configureDucky() {
   const { prompt } = enquirer;

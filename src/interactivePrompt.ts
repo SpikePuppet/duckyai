@@ -43,6 +43,7 @@ export async function interactivePrompt(): Promise<void> {
   );
   console.log("");
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const input: UserChatPrompt = await prompt({
       type: "input",
