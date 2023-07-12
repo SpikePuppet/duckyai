@@ -13,19 +13,21 @@ program
 
 program
   .command("configure")
-  .description("Configure Ducky!")
+  .description(
+    "Configure Ducky! Setup your OpenAI key and other configuration items",
+  )
   .action(async () => {
     await configureDucky().catch(console.error);
   });
 
 program
   .command("chat", { isDefault: true })
-  .description("Chat with Ducky!")
+  .description("Chat with Ducky! Ask questions just like you're using ChatGPT")
   .action(async () => interactivePrompt().catch(console.error));
 
 program
   .command("query")
-  .description("Query Ducky!")
+  .description("Query Ducky! Ask ducky a question and get an immediate answer")
   .argument("<question>", "The query you have for Ducky!")
   .action(async (question) => query(question).catch(console.error));
 
