@@ -9,7 +9,7 @@ const program = new Command();
 program
   .name("Ducky")
   .description("Ducky! Your command line rubber duck for all things terminal!")
-  .version("0.1.0");
+  .version("0.2.0");
 
 program
   .command("configure")
